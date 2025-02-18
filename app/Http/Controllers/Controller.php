@@ -12,6 +12,13 @@ use Illuminate\Routing\Controller as BaseController;
  *      title="DOTO API",
  *      description="This is the API documentation."
  * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT"
+ * )
  */
 class Controller extends BaseController
 {

@@ -1,18 +1,26 @@
 ### Get all tasks (without optional filters)
 GET {{host}}/tasks
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 ### Get all tasks with filters (filterSearch, sort, pagination)
 GET {{host}}/tasks?filterSearch=ipsum&sortBy=name&sortDesc=false&page=1&itemsPerPage=10
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 ### Get a single task by ID
 GET {{host}}/tasks/5
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 ### Create a new task
 POST {{host}}/tasks
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 {
     "name": "New Task",
@@ -24,6 +32,8 @@ Content-Type: application/json
 ### Update an existing task
 PUT {{host}}/tasks/1
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
 
 {
     "name": "Updated Task",
@@ -35,3 +45,5 @@ Content-Type: application/json
 ### Delete a task
 DELETE {{host}}/tasks/1
 Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{access_token}}
