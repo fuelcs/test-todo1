@@ -1,0 +1,37 @@
+### Get all tasks (without optional filters)
+GET {{host}}/tasks
+Content-Type: application/json
+
+### Get all tasks with filters (filterSearch, sort, pagination)
+GET {{host}}/tasks?filterSearch=ipsum&sortBy=name&sortDesc=false&page=1&itemsPerPage=10
+Content-Type: application/json
+
+### Get a single task by ID
+GET {{host}}/tasks/5
+Content-Type: application/json
+
+### Create a new task
+POST {{host}}/tasks
+Content-Type: application/json
+
+{
+    "name": "New Task",
+    "description": "This is a new task",
+    "completion_date": "2025-12-31",
+    "completed": false
+}
+
+### Update an existing task
+PUT {{host}}/tasks/1
+Content-Type: application/json
+
+{
+    "name": "Updated Task",
+    "description": "Updated description",
+    "completion_date": "2026-01-31",
+    "completed": true
+}
+
+### Delete a task
+DELETE {{host}}/tasks/1
+Content-Type: application/json
