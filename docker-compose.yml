@@ -1,0 +1,57 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:latest
+        container_name: todo1-nginx
+        ports:
+            - "80:80"
+        volumes:
+            - ./docker/nginx:/etc/nginx/conf.d
+            - ./:/var/www
+            - ./docker/logs:/var/log/nginx
+        networks:
+          - todo1-network
+        depends_on:
+          - php
+
+    php:
+        build: ./docker/php
+        container_name: todo1-php
+        volumes:
+            - ./:/var/www
+        restart: unless-stopped
+        networks:
+          - todo1-network
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: todo1-phpmyadmin
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+            UPLOAD_LIMIT: 256000000
+        restart: unless-stopped
+        ports:
+            - "8081:80"
+        networks:
+          - todo1-network
+
+    mysql:
+        image: mysql:8
+        container_name: todo1-mysql
+        restart: unless-stopped
+        volumes:
+            - ./docker:/docker-entrypoint-initdb.d
+            - ./docker/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+            MYSQL_DATABASE: todo1
+        networks:
+          - todo1-network
+
+networks:
+  todo1-network:
+    driver: bridge
